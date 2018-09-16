@@ -2,6 +2,8 @@
 
 The repository implements the LOAM algorithm by Zhang et al. (2014) for realtime odometry and mapping using raw LIDAR scans, as a stanalone library.
 
+![](docs/animation.gif)
+
 ## Dependencies
 
 The repository is build using Bazel. It assumes local repositories for
