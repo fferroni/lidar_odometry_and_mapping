@@ -1,6 +1,6 @@
-#include "BasicLaserOdometry.h"
+#include "basic_laser_odometry.h"
+#include "utils/math_utils.h"
 
-#include "math_utils.h"
 #include <pcl/filters/filter.h>
 #include <Eigen/Eigenvalues>
 #include <Eigen/QR>

@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 // Copyright 2013, Ji Zhang, Carnegie Mellon University
 // Further contributions copyright (c) 2016, Southwest Research Institute
 // All rights reserved.
@@ -32,9 +32,9 @@
 //     Robotics: Science and Systems Conference (RSS). Berkeley, CA, July 2014.
 
 
-#include "Twist.h"
-#include "CircularBuffer.h"
-#include "time_utils.h"
+#include "utils/twist.h"
+#include "utils/circular_buffer.h"
+#include "utils/time_utils.h"
 
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>

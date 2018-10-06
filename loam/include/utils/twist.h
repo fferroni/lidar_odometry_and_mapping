@@ -2,8 +2,8 @@
 #define LOAM_TWIST_H
 
 
-#include "Angle.h"
-#include "Vector3.h"
+#include "angle.h"
+#include "vector3.h"
 
 
 namespace loam {

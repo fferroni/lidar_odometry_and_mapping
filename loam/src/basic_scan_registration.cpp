@@ -1,7 +1,7 @@
-#include <pcl/filters/voxel_grid.h>
+#include "basic_scan_registration.h"
+#include "utils/math_utils.h"
 
-#include "BasicScanRegistration.h"
-#include "math_utils.h"
+#include <pcl/filters/voxel_grid.h>
 
 namespace loam
 {

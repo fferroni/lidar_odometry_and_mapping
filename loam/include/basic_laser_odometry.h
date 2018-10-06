@@ -1,6 +1,6 @@
 #pragma once
-#include "Twist.h"
-#include "nanoflann_pcl.h"
+#include "utils/twist.h"
+#include "utils/nanoflann_pcl.h"
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 

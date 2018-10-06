@@ -31,9 +31,9 @@
 //     Robotics: Science and Systems Conference (RSS). Berkeley, CA, July 2014.
 
 
-#include "BasicLaserMapping.h"
-#include "nanoflann_pcl.h"
-#include "math_utils.h"
+#include "basic_laser_mapping.h"
+#include "utils/nanoflann_pcl.h"
+#include "utils/math_utils.h"
 
 #include <Eigen/Eigenvalues>
 #include <Eigen/QR>

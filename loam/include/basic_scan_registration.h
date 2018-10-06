@@ -5,10 +5,10 @@
 
 #include <pcl/point_cloud.h>
 
-#include "Angle.h"
-#include "Vector3.h"
-#include "CircularBuffer.h"
-#include "time_utils.h"
+#include "utils/angle.h"
+#include "utils/vector3.h"
+#include "utils/circular_buffer.h"
+#include "utils/time_utils.h"
 
 namespace loam
 {
