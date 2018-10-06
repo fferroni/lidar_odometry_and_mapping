@@ -6,10 +6,3 @@ cc_test(
     ],
 )
 
-cc_test(
-    name = "hello_loam",
-    srcs = ["hello_loam.cpp"],
-    deps = [
-        "//loam",
-    ],
-)
