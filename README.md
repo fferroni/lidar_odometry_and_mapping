@@ -17,6 +17,16 @@ The repository is build using Bazel. It assumes local repositories for
 
 Please change the locations if necessary in the WORKSPACE file.
 
+On Ubuntu 16.04 dependencies can be fetched with:
+```
+sudo apt-get update && sudo apt-get install -y libopencv-dev libpcl-dev libeigen3-dev
+```
+
+To build:
+```
+bazel build //...
+```
+
 ## To Do
 
 - Add some unit / functional tests.
