@@ -1,8 +1,9 @@
 [![Build Status](https://travis-ci.org/fferroni/lidar_odometry_and_mapping.svg?branch=master)](https://travis-ci.org/fferroni/lidar_odometry_and_mapping)
+[![BCH compliance](https://bettercodehub.com/edge/badge/fferroni/lidar_odometry_and_mapping?branch=master)](https://bettercodehub.com/)
 
 ## Description
 
-The repository implements the LOAM algorithm by Zhang et al. (2014) for realtime odometry and mapping using raw LIDAR scans, as a stanalone library.
+The repository implements the LOAM algorithm by Zhang et al. (2014) for realtime odometry and mapping using raw LIDAR scans, as a standalone library.
 
 ![](docs/animation.gif)
 
