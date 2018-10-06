@@ -1,5 +1,5 @@
 
-#include <scanRegistrationLib.h>
+#include <scan_registration.h>
 
 #include <velodyne/velodyne_point_cloud.h>
 #include <velodyne/point_types.h>

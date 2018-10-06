@@ -1,4 +1,4 @@
-#include <laserOdometryLib.h>
+#include <laser_odometry.h>
 
 #include <pcl/filters/filter.h>
 
