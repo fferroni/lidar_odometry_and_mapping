@@ -3,7 +3,7 @@
 
 #include <common.h>
 #include <build_transform.h>
-#include <scanRegistrationLib.h>
+#include "scan_registration.h"
 
 #include <opencv/cv.h>
 #include <pcl/kdtree/kdtree_flann.h>

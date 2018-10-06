@@ -6,7 +6,7 @@
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/kdtree/kdtree_flann.h>
 
-#include <laserOdometryLib.h>
+#include "laser_odometry.h"
 #include <common.h>
 
 template <typename PointT>

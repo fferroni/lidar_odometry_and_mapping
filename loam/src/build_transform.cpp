@@ -3,12 +3,12 @@
 #include <pcl/common/eigen.h>
 
 Eigen::Affine3f getTransformationTRzRxRy(float tx, float ty, float tz, float rx, float ry, float rz) {
-  float srx = sin(rx);
-  float crx = cos(rx);
-  float sry = sin(ry);
-  float cry = cos(ry);
-  float srz = sin(rz);
-  float crz = cos(rz);
+  float srx = std::sin(rx);
+  float crx = std::cos(rx);
+  float sry = std::sin(ry);
+  float cry = std::cos(ry);
+  float srz = std::sin(rz);
+  float crz = std::cos(rz);
 
   float crycrz = cry*crz;
   float crycrzsrx = crycrz*srx;
@@ -41,12 +41,12 @@ Eigen::Affine3f getTransformationTRzRxRy(const std::vector<float> &dof, float sc
 }
 
 Eigen::Affine3f getTransformationRyRxRzT(float tx, float ty, float tz, float rx, float ry, float rz) {
-  float srx = sin(rx);
-  float crx = cos(rx);
-  float sry = sin(ry);
-  float cry = cos(ry);
-  float srz = sin(rz);
-  float crz = cos(rz);
+  float srx = std::sin(rx);
+  float crx = std::cos(rx);
+  float sry = std::sin(ry);
+  float cry = std::cos(ry);
+  float srz = std::sin(rz);
+  float crz = std::cos(rz);
 
   float crycrz = cry*crz;
   float crysrz = cry*srz;
@@ -69,12 +69,12 @@ Eigen::Affine3f getTransformationRyRxRzT(const std::vector<float> &dof) {
 }
 
 Eigen::Affine3f getTransformationRzRxRyT(float tx, float ty, float tz, float rx, float ry, float rz) {
-  float srx = sin(rx);
-  float crx = cos(rx);
-  float sry = sin(ry);
-  float cry = cos(ry);
-  float srz = sin(rz);
-  float crz = cos(rz);
+  float srx = std::sin(rx);
+  float crx = std::cos(rx);
+  float sry = std::sin(ry);
+  float cry = std::cos(ry);
+  float srz = std::sin(rz);
+  float crz = std::cos(rz);
 
   float crycrz = cry*crz;
   float crysrz = cry*srz;
@@ -94,12 +94,12 @@ Eigen::Affine3f getTransformationRzRxRyT(const std::vector<float> &dof) {
 }
 
 Eigen::Affine3f getTransformationTRyRxRz(float tx, float ty, float tz, float rx, float ry, float rz) {
-  float srx = sin(rx);
-  float crx = cos(rx);
-  float sry = sin(ry);
-  float cry = cos(ry);
-  float srz = sin(rz);
-  float crz = cos(rz);
+  float srx = std::sin(rx);
+  float crx = std::cos(rx);
+  float sry = std::sin(ry);
+  float cry = std::cos(ry);
+  float srz = std::sin(rz);
+  float crz = std::cos(rz);
 
   float crycrz = cry*crz;
   float srysrz = sry*srz;

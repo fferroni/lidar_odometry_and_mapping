@@ -1,7 +1,7 @@
 #ifndef __LOAM_SCAN_REGISTRATION_H__
 #define __LOAM_SCAN_REGISTRATION_H__
 
-#include <LoamImu.h>
+#include "load_imu.h"
 
 #include <vector>
 #include <cmath>

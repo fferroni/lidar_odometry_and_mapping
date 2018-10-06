@@ -1,4 +1,4 @@
-#include <laserOdometryLib.h>
+#include <laser_odometry.h>
 
 #include <pcl/filters/filter.h>
 
@@ -177,12 +177,12 @@ void LaserOdometry::run(LaserOdometry::Inputs &inputs, LaserOdometry::Outputs &o
           PointType &pointOri = laserCloudOri[i];
           PointType &coeff = coeffSel[i];
 
-          float srx = sin(transformation[0]);
-          float crx = cos(transformation[0]);
-          float sry = sin(transformation[1]);
-          float cry = cos(transformation[1]);
-          float srz = sin(transformation[2]);
-          float crz = cos(transformation[2]);
+          float srx = std::sin(transformation[0]);
+          float crx = std::cos(transformation[0]);
+          float sry = std::sin(transformation[1]);
+          float cry = std::cos(transformation[1]);
+          float srz = std::sin(transformation[2]);
+          float crz = std::cos(transformation[2]);
           float tx = transformation[3];
           float ty = transformation[4];
           float tz = transformation[5];
@@ -388,7 +388,7 @@ bool LaserOdometry::getCornerFeatureCoefficients(const PointType &A, const Point
 
   float weight = 1.0;
   if (iterration >= 5) {
-    weight = 1 - 1.8 * fabs(distance);
+    weight = 1 - 1.8 * std::abs(distance);
   }
 
   coeff.getVector3fMap() = direction * weight;
@@ -405,7 +405,7 @@ bool LaserOdometry::getSurfaceFeatureCoefficients(const PointType &A, const Poin
 
   float weight = 1;
   if (iterration >= 5) {
-    weight = 1 - 1.8 * fabs(distance) / sqrt(X.getVector3fMap().norm());
+    weight = 1 - 1.8 * std::abs(distance) / std::sqrt(X.getVector3fMap().norm());
   }
   coefficients.getVector3fMap() = weight * surfNormal;
   coefficients.intensity = weight * distance;
