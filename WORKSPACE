@@ -1,7 +1,7 @@
 new_local_repository(
     name = "pcl",
     build_file = "third_party/pcl.BUILD",
-    path = "/usr/local/pcl",
+    path = "/usr/include/pcl-1.7",
 )
 
 new_local_repository(
