@@ -1,35 +1,29 @@
 cc_library(
-    name = "velodyne",
-    srcs = [
-        "src/velodyne/velodyne_point_cloud.cpp",
-    ],
-    hdrs = [
-        "include/velodyne/kitti_utils.h",
-        "include/velodyne/point_types.h",
-        "include/velodyne/velodyne_point_cloud.h",
-    ],
-    strip_include_prefix = "include",
-    visibility = ["//visibility:public"],
-    deps = [
-        "@opencv",
-        "@pcl",
-    ],
-)
-
-cc_library(
     name = "loam",
     srcs = glob(
-        ["src/*.cpp"],
-        exclude = ["src/common_ros.cpp"],
+        ["src/*.cpp", "src/*.h"],
+        exclude = [
+            "src/LaserMapping.cpp",
+            "src/LaserOdometry.cpp",
+            "src/MultiScanRegistration.cpp",
+            "src/ScanRegistration.cpp",
+            "src/TransformMaintenance.cpp",
+        ],
     ),
     hdrs = glob(
-        ["include/*.h"],
-        exclude = ["include/common_ros.h"],
+        ["include/*.h", "include/*.hpp"],
+        exclude = [
+            "include/common.h",
+            "include/LaserMapping.h",
+            "include/LaserOdometry.h",
+            "include/MultiScanRegistration.h",
+            "include/ScanRegistration.h",
+            "include/TransformMaintenance.h",
+        ],
     ),
     strip_include_prefix = "include",
     visibility = ["//visibility:public"],
     deps = [
-        ":velodyne",
         "@pcl",
     ],
 )

@@ -6,6 +6,7 @@ test --ram_utilization_factor=10
 
 # This is so we understand failures better
 build --verbose_failures
+build --cxxopt='-std=c++14'
 
 # This is so we don't use sandboxed execution. Sandboxed execution
 # runs stuff in a container, and since Travis already runs its script

@@ -30,51 +30,56 @@
 //   J. Zhang and S. Singh. LOAM: Lidar Odometry and Mapping in Real-time.
 //     Robotics: Science and Systems Conference (RSS). Berkeley, CA, July 2014.
 
-#ifndef LOAM_COMMON_H
-#define LOAM_COMMON_H
+#ifndef LOAM_TRANSFORMMAINTENANCE_H
+#define LOAM_TRANSFORMMAINTENANCE_H
 
-#include <ros/ros.h>
-#include <sensor_msgs/PointCloud2.h>
-#include <pcl_conversions/pcl_conversions.h>
-#include <pcl/point_types.h>
-#include "time_utils.h"
+
+#include <ros/node_handle.h>
+#include <nav_msgs/Odometry.h>
+#include <tf/transform_broadcaster.h>
+
+#include "BasicTransformMaintenance.h"
 
 namespace loam {
 
-/** \brief Construct a new point cloud message from the specified information and publish it via the given publisher.
+/** \brief Implementation of the LOAM transformation maintenance component.
  *
- * @tparam PointT the point type
- * @param publisher the publisher instance
- * @param cloud the cloud to publish
- * @param stamp the time stamp of the cloud message
- * @param frameID the message frame ID
  */
-template <typename PointT>
-inline void publishCloudMsg(ros::Publisher& publisher,
-                            const pcl::PointCloud<PointT>& cloud,
-                            const ros::Time& stamp,
-                            std::string frameID) {
-  sensor_msgs::PointCloud2 msg;
-  pcl::toROSMsg(cloud, msg);
-  msg.header.stamp = stamp;
-  msg.header.frame_id = frameID;
-  publisher.publish(msg);
-}
+class TransformMaintenance: public BasicTransformMaintenance {
+public:
+  TransformMaintenance();
 
+  /** \brief Setup component.
+   *
+   * @param node the ROS node handle
+   * @param privateNode the private ROS node handle
+   */
+  virtual bool setup(ros::NodeHandle& node, ros::NodeHandle& privateNode);
 
-// ROS time adapters
-inline Time fromROSTime(ros::Time const& rosTime)
-{
-  auto epoch = std::chrono::system_clock::time_point();
-  auto since_epoch = std::chrono::seconds(rosTime.sec) + std::chrono::nanoseconds(rosTime.nsec);
-  return epoch + since_epoch;
-}
+  /** \brief Handler method for laser odometry messages.
+   *
+   * @param laserOdometry the new laser odometry
+   */
+  void laserOdometryHandler(const nav_msgs::Odometry::ConstPtr& laserOdometry);
 
-inline ros::Time toROSTime(Time const& time_point)
-{
-  return ros::Time().fromNSec(std::chrono::duration_cast<std::chrono::nanoseconds>(time_point.time_since_epoch()).count());
-}
+  /** \brief Handler method for mapping odometry messages.
+   *
+   * @param odomAftMapped the new mapping odometry
+   */
+  void odomAftMappedHandler(const nav_msgs::Odometry::ConstPtr& odomAftMapped);
+
+private:
+  nav_msgs::Odometry _laserOdometry2;         ///< latest integrated laser odometry message
+  tf::StampedTransform _laserOdometryTrans2;  ///< latest integrated laser odometry transformation
+
+  ros::Publisher _pubLaserOdometry2;          ///< integrated laser odometry publisher
+  tf::TransformBroadcaster _tfBroadcaster2;   ///< integrated laser odometry transformation broadcaster
+
+  ros::Subscriber _subLaserOdometry;    ///< (high frequency) laser odometry subscriber
+  ros::Subscriber _subOdomAftMapped;    ///< (low frequency) mapping odometry subscriber
+};
 
 } // end namespace loam
 
-#endif // LOAM_COMMON_H
+
+#endif //LOAM_TRANSFORMMAINTENANCE_H
