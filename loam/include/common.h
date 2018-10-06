@@ -69,7 +69,7 @@ inline float pointsSqDistance(const PointT &pt1, const PointT &pt2) {
 
 template <typename PointT>
 inline float pointsDistance(const PointT &pt1, const PointT &pt2) {
-  return sqrt(pointsSqDistance(pt1, pt2));
+  return std::sqrt(pointsSqDistance(pt1, pt2));
 }
 
 template <typename PointT>
@@ -84,7 +84,7 @@ inline float normalizedPointsSqDistance(const PointT &pt1, float normalization1,
 template <typename PointT>
 inline float normalizedPointsDistance(const PointT &pt1, float normalization1,
     const PointT &pt2, float normalization2) {
-  return sqrt(normalizedPointsSqDistance(pt1, normalization1, pt2, normalization2));
+  return std::sqrt(normalizedPointsSqDistance(pt1, normalization1, pt2, normalization2));
 }
 
 template <typename PointT>
@@ -94,7 +94,7 @@ inline float pointSqNorm(const PointT &pt) {
 
 template <typename PointT>
 inline float pointNorm(const PointT &pt) {
-  return sqrt(pointSqNorm(pt));
+  return std::sqrt(pointSqNorm(pt));
 }
 
 /**

@@ -47,9 +47,9 @@ public:
 
   void handleInput(float roll, float pitch, float yaw,
       float accX, float accY, float accZ, float time) {
-    accX += - sin(roll) * cos(pitch) * 9.81;
-    accY += - cos(roll) * cos(pitch) * 9.81;
-    accZ +=   sin(pitch) * 9.81;
+    accX += - std::sin(roll) * std::cos(pitch) * 9.81;
+    accY += - std::cos(roll) * std::cos(pitch) * 9.81;
+    accZ +=   std::sin(pitch) * 9.81;
 
     imuPointerLast = (imuPointerLast + 1) % imuQueLength;
 
@@ -77,17 +77,17 @@ public:
     float accY = imuAccY[imuPointerLast];
     float accZ = imuAccZ[imuPointerLast];
 
-    float x1 = cos(roll) * accX - sin(roll) * accY;
-    float y1 = sin(roll) * accX + cos(roll) * accY;
+    float x1 = std::cos(roll) * accX - std::sin(roll) * accY;
+    float y1 = std::sin(roll) * accX + std::cos(roll) * accY;
     float z1 = accZ;
 
     float x2 = x1;
-    float y2 = cos(pitch) * y1 - sin(pitch) * z1;
-    float z2 = sin(pitch) * y1 + cos(pitch) * z1;
+    float y2 = std::cos(pitch) * y1 - std::sin(pitch) * z1;
+    float z2 = std::sin(pitch) * y1 + std::cos(pitch) * z1;
 
-    accX = cos(yaw) * x2 + sin(yaw) * z2;
+    accX = std::cos(yaw) * x2 + std::sin(yaw) * z2;
     accY = y2;
-    accZ = -sin(yaw) * x2 + cos(yaw) * z2;
+    accZ = -std::sin(yaw) * x2 + std::cos(yaw) * z2;
 
     int imuPointerBack = (imuPointerLast + imuQueLength - 1) % imuQueLength;
     double timeDiff = imuTime[imuPointerLast] - imuTime[imuPointerBack];
@@ -200,16 +200,16 @@ protected:
     imuShiftFromStartYCur = imuShiftYCur - imuShiftYStart - imuVeloYStart * pointTime;
     imuShiftFromStartZCur = imuShiftZCur - imuShiftZStart - imuVeloZStart * pointTime;
 
-    float x1 = cos(imuYawStart) * imuShiftFromStartXCur - sin(imuYawStart) * imuShiftFromStartZCur;
+    float x1 = std::cos(imuYawStart) * imuShiftFromStartXCur - std::sin(imuYawStart) * imuShiftFromStartZCur;
     float y1 = imuShiftFromStartYCur;
-    float z1 = sin(imuYawStart) * imuShiftFromStartXCur + cos(imuYawStart) * imuShiftFromStartZCur;
+    float z1 = std::sin(imuYawStart) * imuShiftFromStartXCur + std::cos(imuYawStart) * imuShiftFromStartZCur;
 
     float x2 = x1;
-    float y2 = cos(imuPitchStart) * y1 + sin(imuPitchStart) * z1;
-    float z2 = -sin(imuPitchStart) * y1 + cos(imuPitchStart) * z1;
+    float y2 = std::cos(imuPitchStart) * y1 + std::sin(imuPitchStart) * z1;
+    float z2 = -std::sin(imuPitchStart) * y1 + std::cos(imuPitchStart) * z1;
 
-    imuShiftFromStartXCur = cos(imuRollStart) * x2 + sin(imuRollStart) * y2;
-    imuShiftFromStartYCur = -sin(imuRollStart) * x2 + cos(imuRollStart) * y2;
+    imuShiftFromStartXCur = std::cos(imuRollStart) * x2 + std::sin(imuRollStart) * y2;
+    imuShiftFromStartYCur = -std::sin(imuRollStart) * x2 + std::cos(imuRollStart) * y2;
     imuShiftFromStartZCur = z2;
   }
 
@@ -219,43 +219,43 @@ protected:
     imuVeloFromStartYCur = imuVeloYCur - imuVeloYStart;
     imuVeloFromStartZCur = imuVeloZCur - imuVeloZStart;
 
-    float x1 = cos(imuYawStart) * imuVeloFromStartXCur - sin(imuYawStart) * imuVeloFromStartZCur;
+    float x1 = std::cos(imuYawStart) * imuVeloFromStartXCur - std::sin(imuYawStart) * imuVeloFromStartZCur;
     float y1 = imuVeloFromStartYCur;
-    float z1 = sin(imuYawStart) * imuVeloFromStartXCur + cos(imuYawStart) * imuVeloFromStartZCur;
+    float z1 = std::sin(imuYawStart) * imuVeloFromStartXCur + std::cos(imuYawStart) * imuVeloFromStartZCur;
 
     float x2 = x1;
-    float y2 = cos(imuPitchStart) * y1 + sin(imuPitchStart) * z1;
-    float z2 = -sin(imuPitchStart) * y1 + cos(imuPitchStart) * z1;
+    float y2 = std::cos(imuPitchStart) * y1 + std::sin(imuPitchStart) * z1;
+    float z2 = -std::sin(imuPitchStart) * y1 + std::cos(imuPitchStart) * z1;
 
-    imuVeloFromStartXCur = cos(imuRollStart) * x2 + sin(imuRollStart) * y2;
-    imuVeloFromStartYCur = -sin(imuRollStart) * x2 + cos(imuRollStart) * y2;
+    imuVeloFromStartXCur = std::cos(imuRollStart) * x2 + std::sin(imuRollStart) * y2;
+    imuVeloFromStartYCur = -std::sin(imuRollStart) * x2 + std::cos(imuRollStart) * y2;
     imuVeloFromStartZCur = z2;
   }
 
   void transformToStartIMU(PointType *p)
   {
-    float x1 = cos(imuRollCur) * p->x - sin(imuRollCur) * p->y;
-    float y1 = sin(imuRollCur) * p->x + cos(imuRollCur) * p->y;
+    float x1 = std::cos(imuRollCur) * p->x - std::sin(imuRollCur) * p->y;
+    float y1 = std::sin(imuRollCur) * p->x + std::cos(imuRollCur) * p->y;
     float z1 = p->z;
 
     float x2 = x1;
-    float y2 = cos(imuPitchCur) * y1 - sin(imuPitchCur) * z1;
-    float z2 = sin(imuPitchCur) * y1 + cos(imuPitchCur) * z1;
+    float y2 = std::cos(imuPitchCur) * y1 - std::sin(imuPitchCur) * z1;
+    float z2 = std::sin(imuPitchCur) * y1 + std::cos(imuPitchCur) * z1;
 
-    float x3 = cos(imuYawCur) * x2 + sin(imuYawCur) * z2;
+    float x3 = std::cos(imuYawCur) * x2 + std::sin(imuYawCur) * z2;
     float y3 = y2;
-    float z3 = -sin(imuYawCur) * x2 + cos(imuYawCur) * z2;
+    float z3 = -std::sin(imuYawCur) * x2 + std::cos(imuYawCur) * z2;
 
-    float x4 = cos(imuYawStart) * x3 - sin(imuYawStart) * z3;
+    float x4 = std::cos(imuYawStart) * x3 - std::sin(imuYawStart) * z3;
     float y4 = y3;
-    float z4 = sin(imuYawStart) * x3 + cos(imuYawStart) * z3;
+    float z4 = std::sin(imuYawStart) * x3 + std::cos(imuYawStart) * z3;
 
     float x5 = x4;
-    float y5 = cos(imuPitchStart) * y4 + sin(imuPitchStart) * z4;
-    float z5 = -sin(imuPitchStart) * y4 + cos(imuPitchStart) * z4;
+    float y5 = std::cos(imuPitchStart) * y4 + std::sin(imuPitchStart) * z4;
+    float z5 = -std::sin(imuPitchStart) * y4 + std::cos(imuPitchStart) * z4;
 
-    p->x = cos(imuRollStart) * x5 + sin(imuRollStart) * y5 + imuShiftFromStartXCur;
-    p->y = -sin(imuRollStart) * x5 + cos(imuRollStart) * y5 + imuShiftFromStartYCur;
+    p->x = std::cos(imuRollStart) * x5 + std::sin(imuRollStart) * y5 + imuShiftFromStartXCur;
+    p->y = -std::sin(imuRollStart) * x5 + std::cos(imuRollStart) * y5 + imuShiftFromStartYCur;
     p->z = z5 + imuShiftFromStartZCur;
   }
 

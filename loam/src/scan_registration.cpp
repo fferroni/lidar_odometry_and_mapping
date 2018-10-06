@@ -117,7 +117,7 @@ void ScanRegistration::extractFeatures(const pcl::PointCloud<velodyne_pointcloud
     point.z = cloudIn[i].z;
 
 
-    float angle = atan(point.y / sqrt(point.x * point.x + point.z * point.z)) * 180 / M_PI;
+    float angle = std::atan(point.y / std::sqrt(point.x * point.x + point.z * point.z)) * 180 / M_PI;
     int scanID = cloudIn[i].ring;
 
 

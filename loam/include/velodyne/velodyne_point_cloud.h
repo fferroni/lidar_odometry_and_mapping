@@ -39,7 +39,7 @@ namespace but_velodyne {
  */
     inline float computeRange(const velodyne_pointcloud::PointXYZIR &pt)
     {
-        return sqrt(pt.x * pt.x + pt.y * pt.y + pt.z * pt.z);
+        return std::sqrt(pt.x * pt.x + pt.y * pt.y + pt.z * pt.z);
     }
 
 /**!

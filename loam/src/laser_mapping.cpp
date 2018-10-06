@@ -72,10 +72,10 @@ void LaserMapping::run(const Inputs &inputs, Outputs &outputs, float timeLaserOd
                                    + (pointOnYAxis.z - cornerZ) * (pointOnYAxis.z - cornerZ);
 
                 float check1 = 100.0 + squaredSide1 - squaredSide2
-                             - 10.0 * sqrt(3.0) * sqrt(squaredSide1);
+                             - 10.0 * std::sqrt(3.0) * std::sqrt(squaredSide1);
 
                 float check2 = 100.0 + squaredSide1 - squaredSide2
-                             + 10.0 * sqrt(3.0) * sqrt(squaredSide1);
+                             + 10.0 * std::sqrt(3.0) * std::sqrt(squaredSide1);
 
                 if (check1 < 0 && check2 > 0) {
                   isInLaserFOV = true;
@@ -185,7 +185,7 @@ void LaserMapping::run(const Inputs &inputs, Outputs &outputs, float timeLaserOd
           if (planeValid) {
             float pd2 = planeCoef.head(3).dot(pointSel.getVector3fMap()) + planeCoef(3);
 
-            float s = 1 - 0.9 * fabs(pd2) / sqrt(pointSel.getVector3fMap().norm());
+            float s = 1 - 0.9 * std::abs(pd2) / std::sqrt(pointSel.getVector3fMap().norm());
 
             PointType coeff;
             coeff.getVector3fMap() = planeCoef.head(3) * s;
@@ -199,12 +199,12 @@ void LaserMapping::run(const Inputs &inputs, Outputs &outputs, float timeLaserOd
         }
       }
 
-      float srx = sin(transformTobeMapped[0]);
-      float crx = cos(transformTobeMapped[0]);
-      float sry = sin(transformTobeMapped[1]);
-      float cry = cos(transformTobeMapped[1]);
-      float srz = sin(transformTobeMapped[2]);
-      float crz = cos(transformTobeMapped[2]);
+      float srx = std::sin(transformTobeMapped[0]);
+      float crx = std::cos(transformTobeMapped[0]);
+      float sry = std::sin(transformTobeMapped[1]);
+      float cry = std::cos(transformTobeMapped[1]);
+      float srz = std::sin(transformTobeMapped[2]);
+      float crz = std::cos(transformTobeMapped[2]);
 
       int laserCloudSelNum = laserCloudOri.size();
       if (laserCloudSelNum < 50) {
@@ -444,7 +444,7 @@ bool LaserMapping::findPlane(const pcl::PointCloud<PointType> &cloud, const std:
   coef *= norm;
 
   for (int j = 0; j < indices.size(); j++) {
-    if (fabs(coef.dot(cloud[indices[j]].getVector4fMap()) + coef(3)) > maxDistance) {
+    if (std::abs(coef.dot(cloud[indices[j]].getVector4fMap()) + coef(3)) > maxDistance) {
       return false;
     }
   }
