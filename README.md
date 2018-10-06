@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fferroni/lidar_odometry_and_mapping.svg?branch=master)](https://travis-ci.org/fferroni/lidar_odometry_and_mapping)
+
 ## Description
 
 The repository implements the LOAM algorithm by Zhang et al. (2014) for realtime odometry and mapping using raw LIDAR scans, as a stanalone library.
@@ -18,5 +20,5 @@ Please change the locations if necessary in the WORKSPACE file.
 
 - Add some unit / functional tests.
 - Remove OpenCV and PCL dependencies, and use just Eigen for portability.
-- Add CI and visualization scripts.
+- Add visualization scripts.
 - Run with 2-threads (one for odometry, the other for mapping).
