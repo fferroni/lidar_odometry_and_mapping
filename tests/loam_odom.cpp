@@ -74,30 +74,24 @@ int main(int argc, char** argv) {
         LaserMapping::Outputs mappingOutputs;
         mapping.run(mappingInputs, mappingOutputs, time);
 
-        Eigen::Affine3f transf = pcl::getTransformation(mappingOutputs.transformToMap[4],
-                                                        mappingOutputs.transformToMap[3],
-                                                        mappingOutputs.transformToMap[5],
-                                                        mappingOutputs.transformToMap[1],
-                                                        mappingOutputs.transformToMap[0],
-                                                        mappingOutputs.transformToMap[2]);
+        Eigen::Affine3f transf = pcl::getTransformation(-mappingOutputs.transformToMap[3],
+                                                        -mappingOutputs.transformToMap[4],
+                                                         mappingOutputs.transformToMap[5],
+                                                        -mappingOutputs.transformToMap[0],
+                                                        -mappingOutputs.transformToMap[1],
+                                                         mappingOutputs.transformToMap[2]);
 
         time += SCAN_PERIOD;
-
-        std::cout << transf.matrix() << std::endl;
-        output_file << transf.matrix() << std::endl;
 
         // aggregate (need to first get point cloud back into KITTI coordinates)
         auto xyz = cloud.getXYZCloudPtr();
         Eigen::Matrix4f transformation;
-        transformation <<
-                0, -1,  0,  0,
-                0,  0, -1,  0,
-                1,  0,  0,  0,
-                0,  0,  0,  1;
-        pcl::transformPointCloud(*xyz, *xyz, transf.matrix() * transformation.inverse());
-
+        transformation << 0, -1,  0,  0, 0,  0, -1,  0, 1,  0,  0,  0, 0,  0,  0,  1;
+        auto t = transformation * transf.matrix() * transformation;
+        std::cout << t << std::endl;
+        output_file << t << std::endl;
+        pcl::transformPointCloud(*xyz, *xyz, t);
         aggregated_cloud += *xyz;
-
         pcl::io::savePLYFileBinary(output_ply, aggregated_cloud);
     }
 
