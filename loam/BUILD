@@ -33,3 +33,30 @@ cc_library(
         "@pcl",
     ],
 )
+
+cc_test(
+    name = "scan_registration_test",
+    srcs = ["test/scan_registration_test.cpp"],
+    deps = [
+        ":loam",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "laser_odometry_test",
+    srcs = ["test/laser_odometry_test.cpp"],
+    deps = [
+        ":loam",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "laser_mapping_test",
+    srcs = ["test/laser_mapping_test.cpp"],
+    deps = [
+        ":loam",
+        "@googletest//:gtest_main",
+    ],
+)

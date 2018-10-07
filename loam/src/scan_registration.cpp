@@ -23,12 +23,9 @@ void ScanRegistration::run(const pcl::PointCloud<velodyne_pointcloud::PointXYZIR
   pcl::PointCloud<PointType> surfPointsLessFlat;
 
   // laserCloudIn is ring split & concatenated back to laserCloudOut
-  std::cout << "extract" << std::endl;
   extractFeatures(laserCloudIn, scanTime, *outputs.laserCloudOut,
       *outputs.cornerPointsSharp, *outputs.cornerPointsLessSharp,
       *outputs.surfPointsFlat, *outputs.surfPointsLessFlat);
-  std::cout << "extract finished" << std::endl;
-
 }
 
 float ScanRegistration::computeStartHorizontalAngle(const velodyne_pointcloud::PointXYZIR &first_pt) {
