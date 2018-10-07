@@ -25,7 +25,7 @@ bool endsWith(const std::string& str, const std::string& suffix) {
 
 /**
  * Usage:
- * bazel build tests:loam_odom
+ * bazel build -c opt tests:loam_odom
  * ./bazel-bin/tests/loam_odom pose_file.txt aggregated.ply $(ls *.bin | sort | xargs)
  */
 int main(int argc, char** argv) {

@@ -27,6 +27,15 @@ To build:
 bazel build //...
 ```
 
+## KITTI example
+
+To run on a KITTI sequence of raw LIDAR data,
+
+```
+bazel build -c opt tests:loam_odom
+./bazel-bin/tests/loam_odom pose_file.txt aggregated.ply $(ls $PATH_TO_KITTI_VELODYNE/*.bin | sort | xargs)
+```
+
 ## To Do
 
 - Add some unit / functional tests.
